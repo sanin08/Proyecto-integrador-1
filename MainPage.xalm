@@ -1,0 +1,29 @@
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Aqui_cabe_un_arbol.MainPage"
+             BackgroundColor="MediumAquamarine"
+             >
+
+
+    <StackLayout Orientation="Vertical">
+        <!-- Place new controls here -->
+         <Label Text="Coordenadas" />
+            <Label Text="Latitud Y" />
+            <Label x:Name="lat" />
+            <Label Text="Longitud X"/>
+            <Label x:Name="lon"/>
+            <Label Text="Altura h"/>
+            <Label x:Name="altimetry"/>
+        <Label Text="¿Aquí cabe un árbol?" FontSize="Title" TextColor="Black" HorizontalOptions="Center"/> 
+        <Image Source="medeMAP.jpg" WidthRequest="15" HeightRequest="35"></Image>
+        <Label Text="Ingrese ubicación" FontSize="Medium" TextColor="Black" HorizontalOptions="Center"/>
+        <Entry x:Name="txtNom"/>
+        <Button Text="Enviar ubicación" x:Name="btnMostrar" HorizontalOptions="CenterAndExpand" WidthRequest="300"/>
+        <Button Text="Marcar posición" Clicked="Handle_Clicked" HorizontalOptions="CenterAndExpand" WidthRequest="300" />
+        <Button Text="Insertar foto" x:Name="btnFoto" HorizontalOptions="CenterAndExpand" WidthRequest="300"/>
+    </StackLayout>
+   
+</ContentPage>

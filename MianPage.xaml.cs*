@@ -1,0 +1,63 @@
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace Aqui_cabe_un_arbol
+{
+    // Learn more about making custom code visible in the Xamarin.Forms previewer
+    // by visiting https://aka.ms/xamarinforms-previewer
+    [DesignTimeVisible(false)]
+    public partial class MainPage : ContentPage
+    {
+        int count = 0; //Contador para en numero de clicks
+        void Handle_Clicked(object sender, System.EventArgs e)//metodo para la la acción del boton
+        {
+            count++;
+            ((Button)sender).Text = $"Has marcado {count} ubicacion(es).";
+        }
+        public MainPage()
+        {
+
+
+            InitializeComponent();
+            initializePlugin();
+        }
+
+        private async void initializePlugin()
+        {
+            if (!CrossGeolocator.IsSupported)
+            {
+                await DisplayAlert("Error", "ha ocurrido un error al cargar el plugin", "OK");
+                return;
+            }
+
+           
+
+            CrossGeolocator.Current.PositionChanged += Current_PositionChanged;// Se llama al metodo
+            await CrossGeolocator.Current.StartListeningAsync(new TimeSpan(0, 0, 2), 0.5); //cada cuando se hará la geolocalización
+
+
+
+        }
+
+        //metodo para Geolocalizar y añadir a los campos de la interfaz
+        private void Current_PositionChanged(object sender, Plugin.Geolocator.Abstractions.PositionEventArgs e)
+        {
+            if (!CrossGeolocator.Current.IsListening)
+            {
+                return;
+            }
+            var position = CrossGeolocator.Current.GetPositionAsync();
+
+            lat.Text = position.Result.Latitude.ToString();
+            lon.Text = position.Result.Longitude.ToString();
+            altimetry.Text = position.Result.Altitude.ToString();
+        }
+    }
+}
